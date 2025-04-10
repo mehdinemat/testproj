@@ -1,10 +1,11 @@
 import { Badge, Box, Button, Card, Center, Divider, HStack, Image, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Radio, Text, useDisclosure, VStack } from "@chakra-ui/react";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
 import { FaHeadphonesAlt } from "react-icons/fa";
 import { IoBasketOutline, IoDocuments } from "react-icons/io5";
 import { MdKeyboardVoice } from "react-icons/md";
+import useSWR from "swr";
 import Footer from "./footer";
+import HistoryItemCard from "./historyItemCard";
 
 const menuList = [
   { title: 'صفحه اصلی', icon: <MdKeyboardVoice fontSize={'18px'} />, link: 'audio' },
@@ -16,17 +17,13 @@ const menuList = [
   // { title: 'توصیف خطبه', icon: <FaFile fontSize={'18px'} /> },
 ]
 
-
 const MainLayout = ({ children }) => {
 
   const router = useRouter()
 
+  const { data: dataHistoric, isLoading: isLoadingHistoric } = useSWR('to_text/histories')
+
   const { onOpen, isOpen, onClose } = useDisclosure()
-
-
-  useEffect(() => {
-    console.log(router.asPath?.replace('/', ''))
-  }, [router])
 
   const handleButtonClick = (link) => {
     router.replace(link)
@@ -56,6 +53,11 @@ const MainLayout = ({ children }) => {
 
         <Card as={Box} display={'flex'} justifyContent={'start'} width="200px" bg={'white'} p={'10px'} height={'calc( 100vh - 120px )'} mt={'24px'} mr={'24px'} borderRadius={'16px'}>
           <Text fontSize={'sm'} color={'gray'}>تاریخچه تبدیل</Text>
+          {
+            dataHistoric?.items?.map((item) => (
+              <HistoryItemCard item={item} />
+            ))
+          }
           <Center height={'100%'}>
             <VStack>
               <Image src="./nohistory.png" width={'88px'} height={'56px'} />

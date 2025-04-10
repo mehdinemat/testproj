@@ -5,14 +5,61 @@ import Guid from "@/components/guid";
 import MainLayout from "@/components/mainLayout";
 import Questions from "@/components/questions";
 import { Button, Card, Grid, GridItem, HStack, IconButton, Text, VStack } from "@chakra-ui/react";
+import axios from "axios";
 import dynamic from 'next/dynamic';
-import { useState } from "react";
-import { IoAdd, IoFileTray, IoSettings } from "react-icons/io5";
+import React, { useEffect, useState } from "react";
+import { IoAdd, IoSettings } from "react-icons/io5";
 
 const AudioPlayer = dynamic(() => import('@/components/audioPlayer'), { ssr: false });
 const Index = () => {
 
   const [onFileUpload, setOnFileUpload] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
+  const [uploadProgress, setUploadProgress] = useState(0); // Track upload progress
+  const [fastCharacter, setFastCharacter] = useState(false)
+  const [textImage, setTextImage] = useState('')
+
+  useEffect(() => {
+    if (!onFileUpload) return;
+
+    const fetchData = async () => {
+      const formData = new FormData();
+      formData.append("file", onFileUpload);
+      console.log('this i s send file ')
+      try {
+        setIsLoading(true)
+        const response = await axios.post(
+          "http://192.168.10.161:8020/to_text/image",
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+            onUploadProgress: (progressEvent) => {
+              const percentCompleted = Math.round(
+                (progressEvent.loaded * 100) / progressEvent.total
+              );
+              setUploadProgress(percentCompleted);
+            },
+          }
+        );
+        setIsLoading(false)
+        setTextImage(response?.data);
+      } catch (error) {
+
+        setIsLoading(false)
+        console.error("Error uploading audio:", error);
+      }
+    };
+
+    fetchData();
+  }, [onFileUpload]);
+
+  const handleNewImageButton = () => {
+    setFastCharacter(false)
+    setOnFileUpload('')
+    setUploadProgress(0)
+  }
 
   return (
     <MainLayout>
@@ -28,7 +75,7 @@ const Index = () => {
             <AudioPlayer progressBar={true} downloading={true} />
           </Card> */}
           {onFileUpload && <HStack w={'100%'} alignItems={'end'} justifyContent={'end'} my={'16px'}>
-            <Button leftIcon={<IoAdd />} colorScheme="blue" variant={'outline'}>افزودن ویس جدید</Button>
+            <Button leftIcon={<IoAdd />} colorScheme="blue" variant={'outline'} onClick={handleNewImageButton}>افزودن تصویر جدید</Button>
           </HStack>}
           {!onFileUpload
             ? <Card gap={'10px'} w={'100%'} padding={'15px'} variant='outline' borderRadius={'16px'}>
@@ -42,14 +89,18 @@ const Index = () => {
               <AudioUpload onFileUpload={setOnFileUpload} title={'تبدیل عکس و پی دی اف به متن'} subTitle={'تصویر یا پی‌ دی ‌اف خود را وارد کنید تا متن تایپ شده تحویل بگیرید!'} />
 
             </Card>
-            : <Card as={VStack} alignItems={'start'} variant='outline' justifyContent={'start'} w={'100%'} h={'400px'} overflow='hidden'
-              variant='outline' bgColor={'white'} padding={'16px'}>
+            : <Card as={VStack} alignItems={'start'} variant='outline' justifyContent={'start'} w={'100%'} h={'400px'} overflow='hidden' bgColor={'white'} padding={'16px'}>
               <HStack>
-                <IoFileTray color="#90A1B9" />
-                <Text color={'#90A1B9'}>متن خطبه نماز جمعه پردیسان ۱۴۰۳/۱۲/۱۰:</Text>
+                {/* <IoFileTray color="#90A1B9" /> */}
+                <Text color={'#90A1B9'}></Text>
               </HStack>
               <Text fontWeight={'bold'}>
-                لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد. در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به پایان رسد وزمان مورد نیاز شامل حروفچینی دستاوردهای اصلی و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده ...
+                {textImage?.original?.map((item, index) => (
+                  <React.Fragment key={index}>
+                    {item}
+                    <br />
+                  </React.Fragment>
+                ))}
               </Text>
             </Card>}
           {onFileUpload && <HStack w={'100%'} justifyContent={'end'} my={'16px'}>

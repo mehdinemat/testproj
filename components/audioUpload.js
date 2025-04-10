@@ -21,7 +21,7 @@ const AudioUpload = ({ onFileUpload, title, subTitle }) => {
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
     accept: {
-      'audio/*': [],
+      'image/*': [],
     },
     noClick: true, // Disable click on the dropzone container itself
   });
