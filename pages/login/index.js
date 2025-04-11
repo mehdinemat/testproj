@@ -1,64 +1,128 @@
-
-import { Box, Button, Card, Center, Checkbox, HStack, Image, Input, Text, VStack } from "@chakra-ui/react"
-import dynamic from 'next/dynamic'
-import { useForm } from "react-hook-form"
-import { IoArrowForward } from "react-icons/io5"
-import useSWRMutation from 'swr/mutation'
-import animationData from '../../public/loginanimation.json'
-const Lottie = dynamic(() => import('lottie-react'), {
-  ssr: false
+import {
+  Box,
+  Button,
+  Card,
+  Center,
+  Checkbox,
+  Divider,
+  HStack,
+  Image,
+  Input,
+  Text,
+  VStack,
+} from "@chakra-ui/react";
+import dynamic from "next/dynamic";
+import { useForm } from "react-hook-form";
+import { IoArrowForward, IoLogoGoogle } from "react-icons/io5";
+import useSWRMutation from "swr/mutation";
+import animationData from "../../public/loginanimation.json";
+const Lottie = dynamic(() => import("lottie-react"), {
+  ssr: false,
 });
 
 const Index = () => {
+  const { register, setValue, getValues, handleSubmit } = useForm();
 
-  const { register, setValue, getValues, handleSubmit } = useForm()
-
-  const { trigger, isLoading, isMutating } = useSWRMutation('llm_tree/users/login')
+  const { trigger, isLoading, isMutating } = useSWRMutation(
+    "llm_tree/users/login"
+  );
   const handleSendSubmit = (e) => {
-    trigger()
-  }
+    trigger();
+  };
 
   return (
-    <Box backgroundImage="url('./bg.png')"
+    <Box
+      backgroundImage="url('./bg.png')"
       backgroundSize="cover"
       backgroundPosition="center"
       backgroundRepeat="no-repeat"
       height="100vh"
       width="100%"
-      bgColor="#F1F5F9" padding={'20px'}>
-      <Card as={VStack} alignItems={'start'} height={'100%'} width={'532px'} padding={'20px'}>
-        <HStack>
-          <IoArrowForward color="gray" />
-          <Text color={'gray'}>صفحه اصلی</Text>
-        </HStack>
-        <Center w={'100%'} mt={'20px'} as={VStack} justifyContent={'space-between'} height={'100%'}>
-          <Image src="./loginlogo.png" width={'327px'} height={'88px'} />
-          <VStack w={'100%'} alignItems={'start'} px={'66px'} mt={'10px'} as={'form'} onSubmit={handleSubmit(handleSendSubmit)}>
-            <Text fontWeight={'bold'} fontSize={'20px'} mt={'10px'} w={'100%'} textAlign={'center'}>ورود به حساب کاربری</Text>
-            <Text fontSize={'sm'} color={'gray'} w={'100%'} textAlign={'center'}>لطفا نام کاربری و رمز عبور خود را وارد فرمایید</Text>
-            <Text fontWeight={'bold'}>نام کاربری</Text>
-            <Input {...register('username')} />
-            <Text fontWeight={'bold'}>رمز عبور</Text>
-            <Input {...register('password')} />
-            <HStack w={'100%'} justifyContent={'space-between'}>
+      bgColor="#F1F5F9"
+    >
+      <HStack height={"100%"}>
+        <Box
+          w={"40%"}
+          alignItems={"center"}
+          justifyContent={"center"}
+          as={HStack}
+        >
+          <VStack
+            w={"350px"}
+            mt={"20px"}
+            as={VStack}
+            justifyContent={"center"}
+            height={"100%"}
+          >
+            <Image src="./loginlogo.png" width={"165px"} height={"68px"} />
+            <Text fontSize={"23px"} color={"#333333"} w={"327px"} mb={"20px"}>
+              شبکه اجتماعی پرسش و پاسخ دینی
+            </Text>
+            <Divider w={"350px"} h={"2px"} bgColor={"#29CCCC"} />
+            <Text fontSize={"25px"} mt={"20px"}>
+              ورود به حساب کاربری
+            </Text>
+            <Input
+              height={"46px"}
+              placeholder="نام کاربری یا شماره همراه"
+              my={"10px"}
+              sx={{
+                "::placeholder": {
+                  textAlign: "center", // this line is also needed to target the placeholder itself
+                },
+              }}
+            />
+            <Input
+              height={"46px"}
+              placeholder="کلمه عبور"
+              mb={"10px"}
+              sx={{
+                "::placeholder": {
+                  textAlign: "center", // this line is also needed to target the placeholder itself
+                },
+              }}
+            />
+            <HStack w={"100%"} justifyContent={"space-between"}>
               <HStack>
-                <Checkbox colorScheme="blue"></Checkbox>
-                <Text fontSize={'sm'}>مرا بخاطر بسپار</Text>
+                <Checkbox></Checkbox>
+                <Text fontSize={"18px"}>مرا به خاطر بسپار</Text>
               </HStack>
-              <Text fontSize={'sm'}>فراموشی رمز عبور؟</Text>
+              <Text color={"#29CCCC"} fontSize={"18px"}>
+                فراموشی رمز عبور
+              </Text>
             </HStack>
-            <Button colorScheme="blue" w={'100%'} mt={'20px'} type='submit'>ورود</Button>
+            <Button w={"100%"} bgColor={"#29CCCC"} height={"46px"} my={"20px"}>
+              ورود
+            </Button>
+            <Button
+              variant={"outline"}
+              w={"100%"}
+              rightIcon={<IoLogoGoogle />}
+              height={"46px"}
+            >
+              ورود با حساب گوگل
+            </Button>
           </VStack>
-          <HStack alignItems={'center'}>
-            <Text>حساب کاربری ندارید؟</Text>
-            <Text color={'blue'} fontSize={'sm'} cursor={'pointer'}>ثبت نام کنید</Text>
-          </HStack>
-        </Center>
-      </Card>
+        </Box>
+        <Box position="relative" w="60%" h="100%">
+          {/* Base / background image */}
+          <Image src="./loginbg.png" objectFit="cover" w="100%" h="100%" />
 
-      {animationData && <Lottie animationData={animationData} loop={true} style={{ width: '50%', height: '80%', position: 'absolute', bottom: 0, top: 0, left: '10%', zIndex: 1 }} />}
+          {/* Overlay / centered image */}
+          <Image
+            src="./loginlogoqu.png"
+            alt="Centered Image"
+            position="absolute"
+            top="50%"
+            left="50%"
+            width={"130px"}
+            height={"158px"}
+            transform="translate(-50%, -50%)"
+          />
+        </Box>
+      </HStack>
     </Box>
-  )
-}
+  );
+};
 
-export default Index
+export default Index;

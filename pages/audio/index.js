@@ -1,16 +1,10 @@
-import AudioUpload from "@/components/audioUpload";
-import Credit from "@/components/credit";
-import Facilities from "@/components/Facilities";
-import Guid from "@/components/guid";
 import MainLayout from "@/components/mainLayout";
-import Questions from "@/components/questions";
 import { Button, Card, Grid, GridItem, HStack, IconButton, Text, VStack } from "@chakra-ui/react";
 import axios from "axios";
 import dynamic from 'next/dynamic';
 import React, { useEffect, useState } from "react";
 import { IoAdd, IoSettings } from "react-icons/io5";
 
-const AudioPlayer = dynamic(() => import('@/components/audioPlayer'), { ssr: false });
 const Index = () => {
 
   const [onFileUpload, setOnFileUpload] = useState('')
@@ -86,7 +80,6 @@ const Index = () => {
                 </VStack>
                 <IconButton icon={<IoSettings />} colorScheme="gray" variant={'outline'} />
               </HStack>
-              <AudioUpload onFileUpload={setOnFileUpload} title={'تبدیل عکس و پی دی اف به متن'} subTitle={'تصویر یا پی‌ دی ‌اف خود را وارد کنید تا متن تایپ شده تحویل بگیرید!'} />
 
             </Card>
             : <Card as={VStack} alignItems={'start'} variant='outline' justifyContent={'start'} w={'100%'} h={'400px'} overflow='hidden' bgColor={'white'} padding={'16px'}>
@@ -106,18 +99,6 @@ const Index = () => {
           {onFileUpload && <HStack w={'100%'} justifyContent={'end'} my={'16px'}>
             <Button leftIcon={<IoAdd />} colorScheme="blue">ثبت تبدیل</Button>
           </HStack>}
-        </GridItem>
-        <GridItem>
-          <Guid />
-        </GridItem>
-        <GridItem >
-          <Facilities />
-        </GridItem>
-        <GridItem >
-          <Credit />
-        </GridItem>
-        <GridItem>
-          <Questions />
         </GridItem>
         {/* <GridItem as={VStack} colSpan={1} >
           <HStack w={'100%'} alignItems={'center'} justifyContent={'start'}>
