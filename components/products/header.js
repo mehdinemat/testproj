@@ -1,16 +1,10 @@
-import {
-  Box,
-  Container,
-  HStack,
-  Stack,
-  Text,
-  VStack
-} from "@chakra-ui/react";
+import { Box, Container, HStack, Stack, Text, VStack } from "@chakra-ui/react";
 import { Geist, Geist_Mono } from "next/font/google";
 import { useRouter } from "next/router";
 import { FaHeadphonesAlt } from "react-icons/fa";
 import { IoDocuments } from "react-icons/io5";
 import { MdKeyboardVoice } from "react-icons/md";
+import HeaderSlider from "./headerslider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -69,21 +63,17 @@ const Header = ({ children }) => {
       justifyContent={"center"}
       alignItems={"center"}
       width="100%"
-      height={"500px"}
+      height={"700px"}
       bg={"#3646B3"}
       p={2}
       px={4}
-      borderBottom={"1px"}
-      borderBottomColor={"gray.200"}
       bgImage={"./homeheader.png"}
       bgSize="cover" // 👈 this makes it cover the container
       bgRepeat="no-repeat"
       bgPosition="center"
     >
       <HStack
-        height={"500px"}
-        as={Container}
-        maxW="5xl"
+        height={"700px"}
         w={"100%"}
         alignItems={"center"}
         justifyContent={"space-between"}
@@ -94,7 +84,15 @@ const Header = ({ children }) => {
           justifyContent={"center"}
           height={"100%"}
         >
-          <Text>fsgsd</Text>
+          <Stack
+            maxW="80%"
+            mx="auto"
+            py={4}
+            top={'0px'}
+            // position={"absolute"}
+          >
+            <HeaderSlider />
+          </Stack>
         </VStack>
       </HStack>
     </Box>

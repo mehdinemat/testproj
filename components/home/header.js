@@ -1,18 +1,23 @@
+import MainLayout from "@/components/mainLayout";
 import {
   Box,
   Center,
   Container,
   Divider,
+  Flex,
   HStack,
+  Input,
+  InputGroup,
+  InputRightElement,
   Stack,
   Text,
-  VStack
+  VStack,
 } from "@chakra-ui/react";
 import { Geist, Geist_Mono } from "next/font/google";
 import { useRouter } from "next/router";
 import React from "react";
 import { FaHeadphonesAlt } from "react-icons/fa";
-import { IoDocuments } from "react-icons/io5";
+import { IoDocuments, IoMicOff, IoOptions } from "react-icons/io5";
 import { MdKeyboardVoice } from "react-icons/md";
 
 const geistSans = Geist({
@@ -84,7 +89,7 @@ const Header = ({ children }) => {
       bgPosition="center"
     >
       <HStack
-        height={"500px"}
+      height={"500px"}
         as={Container}
         maxW="5xl"
         w={"100%"}
@@ -97,6 +102,27 @@ const Header = ({ children }) => {
           justifyContent={"center"}
           height={"100%"}
         >
+          <Text fontSize={"50px"} color={"white"}>
+            پارسا شبکه اجتماعی پرسش و پاسخ دینی
+          </Text>
+          <InputGroup height="60px" width="890px" my={"20px"}>
+            <Input
+              borderRadius={"10px"}
+              width="100%"
+              bgColor="#2A378C"
+              height="60px"
+              placeholder="در میان هزاران پرسش و پاسخ جستجو کنید..."
+              color="white"
+              border={"none"}
+              _placeholder={{ color: "gray.300" }}
+            />
+            <InputRightElement height="100%" ml="20px">
+              <Flex align="center" gap="2">
+                <IoOptions fontSize="20px" color="#29CCCC" />
+                <IoMicOff fontSize="20px" color="#29CCCC" />
+              </Flex>
+            </InputRightElement>
+          </InputGroup>
 
           <HStack as={Center} justifyContent="center" w="50%">
             {siteData?.map((item, index) => (
