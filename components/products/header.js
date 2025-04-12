@@ -1,8 +1,6 @@
 import {
   Box,
-  Center,
   Container,
-  Divider,
   HStack,
   Stack,
   Text,
@@ -10,7 +8,6 @@ import {
 } from "@chakra-ui/react";
 import { Geist, Geist_Mono } from "next/font/google";
 import { useRouter } from "next/router";
-import React from "react";
 import { FaHeadphonesAlt } from "react-icons/fa";
 import { IoDocuments } from "react-icons/io5";
 import { MdKeyboardVoice } from "react-icons/md";
@@ -97,28 +94,7 @@ const Header = ({ children }) => {
           justifyContent={"center"}
           height={"100%"}
         >
-
-          <HStack as={Center} justifyContent="center" w="50%">
-            {siteData?.map((item, index) => (
-              <React.Fragment key={index}>
-                <VStack spacing={0} w={"100%"}>
-                  <Text color="white" fontWeight="thin">
-                    {item?.number}
-                  </Text>
-                  <Text color="white">{item?.title}</Text>
-                </VStack>
-
-                {/* Only add divider if it's not the last item */}
-                {index !== siteData.length - 1 && (
-                  <Divider
-                    orientation="vertical"
-                    h="30px"
-                    borderColor="gray.300"
-                  />
-                )}
-              </React.Fragment>
-            ))}
-          </HStack>
+          <Text>fsgsd</Text>
         </VStack>
       </HStack>
     </Box>

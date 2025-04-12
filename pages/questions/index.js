@@ -1,4 +1,3 @@
-import Header from "@/components/home/header";
 import MainLayout from "@/components/mainLayout";
 import {
   Accordion,
@@ -12,10 +11,12 @@ import {
   Divider,
   Flex,
   HStack,
+  IconButton,
   Text,
   VStack
 } from "@chakra-ui/react";
 import { Geist, Geist_Mono } from "next/font/google";
+import { TbArrowsSort } from "react-icons/tb";
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
 
@@ -62,12 +63,11 @@ const items2 = [
   },
 ];
 
-export default function Home({ children }) {
+const Index = ({ children }) => {
 
   return (
     <MainLayout>
-      <Header />
-      <Container maxW="80%" mx="auto" py={4}>
+      <Container maxW="80%" mx="auto" py={4} marginTop={"100px"}>
 
         <Flex direction="row" width="100%" >
           {/* Right Sidebar */}
@@ -162,7 +162,7 @@ export default function Home({ children }) {
               alignItems={"start"}
             >
               <Text fontWeight={"bold"} fontSize={"16px"}>
-                سؤال‌ها پیشنهادی
+                سؤال‌ها
               </Text>
               <Button
                 width={"189px"}
@@ -173,6 +173,21 @@ export default function Home({ children }) {
               >
                 سوال خود را بپرسید
               </Button>
+            </HStack>
+            <HStack w={"100%"}
+              justifyContent={"space-between"}
+              mb={"10px"}
+              alignItems={"start"}>
+              <Text fontSize={"14px"}>
+                ۲۵۸ سؤال
+              </Text>
+              <HStack>
+                <IconButton icon={<TbArrowsSort />} colorScheme="gray" variant={'ghost'} _hover={{ bgColor: 'none' }} />
+                <Text>مرتب سازی بر اساس:</Text>
+                <Button colorScheme="gray" variant={'ghost'} _hover={{ bgColor: 'none' }} fontWeight={'normal'}>جدیدترین‌ها</Button>
+                <Button colorScheme="gray" variant={'ghost'} _hover={{ bgColor: 'none' }} fontWeight={'normal'}>پربازدیدترین‌ها</Button>
+                <Button colorScheme="gray" variant={'ghost'} _hover={{ bgColor: 'none' }} fontWeight={'normal'}>محبوبترین‌ها</Button>
+              </HStack>
             </HStack>
 
             <Divider my={"20px"} />
@@ -239,3 +254,5 @@ export default function Home({ children }) {
     </MainLayout >
   );
 }
+
+export default Index

@@ -1,7 +1,6 @@
 import MainLayout from "@/components/mainLayout";
 import { Button, Card, Grid, GridItem, HStack, IconButton, Text, VStack } from "@chakra-ui/react";
 import axios from "axios";
-import dynamic from 'next/dynamic';
 import React, { useEffect, useState } from "react";
 import { IoAdd, IoSettings } from "react-icons/io5";
 
@@ -69,7 +68,7 @@ const Index = () => {
             <AudioPlayer progressBar={true} downloading={true} />
           </Card> */}
           {onFileUpload && <HStack w={'100%'} alignItems={'end'} justifyContent={'end'} my={'16px'}>
-            <Button leftIcon={<IoAdd />} colorScheme="blue" variant={'outline'} onClick={handleNewImageButton}>افزودن تصویر جدید</Button>
+            <Button leftIcon={<IoAdd />} colorScheme="blue" variant={'outline'} onClick={handleNewImageButton}>بارگذاری تصویر جدید</Button>
           </HStack>}
           {!onFileUpload
             ? <Card gap={'10px'} w={'100%'} padding={'15px'} variant='outline' borderRadius={'16px'}>
