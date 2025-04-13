@@ -12,7 +12,7 @@ const Reply = () => {
         </VStack>
       </HStack>
       <HStack>
-        <Image src="./star.png" />
+        <Image src="../../star.png" w={'50px'}/>
         <Text>4/5</Text>
       </HStack>
       <Text>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه</Text>
