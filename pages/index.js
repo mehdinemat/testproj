@@ -244,9 +244,9 @@ export default function Home({ children }) {
               </Text>
             </Box>
           </Box>
-          <GridItem colSpan={'3'} w={'100%'}>
-            <SliderCom items={items} height={'380px'} borderRadius={'100%'} />
-            <SliderCom items={items2} height={'270px'} width="350px" borderRadius={'0px'} />
+          <GridItem colSpan={'3'} w={'100%'} >
+            <SliderCom items={items} height={'380px'} borderRadius={'100%'} title={'مراجع'} />
+            <SliderCom items={items2} height={'270px'} width="350px" borderRadius={'0px'} title={'حامیان پارسا'} />
           </GridItem>
         </Grid>
       </Box>
