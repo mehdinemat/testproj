@@ -1,18 +1,17 @@
 import MainLayout from "@/components/mainLayout";
 import {
+  Badge,
   Box,
-  Text,
-  Image,
-  VStack,
-  useColorModeValue,
+  Button,
+  Divider,
   HStack,
   Input,
-  Button,
-  Badge,
-  Divider,
-  UnorderedList,
   ListItem,
+  Text,
   Textarea,
+  UnorderedList,
+  VStack,
+  useColorModeValue
 } from "@chakra-ui/react";
 import Masonry from "react-masonry-css";
 
@@ -62,7 +61,6 @@ const Index = () => {
         maxW="container.xl"
         mx="auto"
         p={"20px"}
-        height={"100%"}
         my={"20px"}
         mt={"120px"}
       >
@@ -252,92 +250,92 @@ const Index = () => {
           <VStack
             w={"100%"}
             alignItems={"start"}
-            
+
             borderRadius={"15px"}
             padding={"20px"}
-            bgColor={'#fef4e2'}  
+            bgColor={'#fef4e2'}
           >
             <Text fontWeight={"bold"} color={'black'}>سؤالات مرتبط</Text>
             <Text color={'black'} my={'10px'}>
               لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ
             </Text>
-           <VStack w={'100%'} border={"1px"}
-            borderColor={"#F9C96D"} padding={'10px'} borderRadius={'15px'}>
-           <HStack>
-              <Text color={'black'}>
-                اگر نتوانیم آن را انجام دهیم، آیا می‌توان فطریه را به یک بدهکار
-                ورشکسته داد؟
-              </Text>
-              <Badge
-                bgColor={"#23D9D7"}
-                padding={"5px"}
-                borderRadius={"5px"}
-                color={"white"}
-              >
-                3 پاسخ
-              </Badge>
-            </HStack>
-            <Divider borderColor={"gray.200"} />
-            <HStack>
-              <Text color={'black'}>
-                اگر نتوانیم آن را انجام دهیم، آیا می‌توان فطریه را به یک بدهکار
-                ورشکسته داد؟
-              </Text>
-              <Badge
-                bgColor={"#23D9D7"}
-                padding={"5px"}
-                borderRadius={"5px"}
-                color={"white"}
-              >
-                3 پاسخ
-              </Badge>
-            </HStack>
-            <Divider borderColor={"gray.200"} />
-            <HStack>
-              <Text color={'black'}>
-                اگر نتوانیم آن را انجام دهیم، آیا می‌توان فطریه را به یک بدهکار
-                ورشکسته داد؟
-              </Text>
-              <Badge
-                bgColor={"#23D9D7"}
-                padding={"5px"}
-                borderRadius={"5px"}
-                color={"white"}
-              >
-                3 پاسخ
-              </Badge>
-            </HStack>
-            <Divider borderColor={"gray.200"} />
-            <HStack>
-              <Text color={'black'}>
-                اگر نتوانیم آن را انجام دهیم، آیا می‌توان فطریه را به یک بدهکار
-                ورشکسته داد؟
-              </Text>
-              <Badge
-                bgColor={"#23D9D7"}
-                padding={"5px"}
-                borderRadius={"5px"}
-                color={"white"}
-              >
-                3 پاسخ
-              </Badge>
-            </HStack>
-            <Divider borderColor={"gray.200"} />
-            <HStack>
-              <Text color={'black'}>
-                اگر نتوانیم آن را انجام دهیم، آیا می‌توان فطریه را به یک بدهکار
-                ورشکسته داد؟
-              </Text>
-              <Badge
-                bgColor={"#23D9D7"}
-                padding={"5px"}
-                borderRadius={"5px"}
-                color={"white"}
-              >
-                3 پاسخ
-              </Badge>
-            </HStack>
-           </VStack>
+            <VStack w={'100%'} border={"1px"}
+              borderColor={"#F9C96D"} padding={'10px'} borderRadius={'15px'}>
+              <HStack>
+                <Text color={'black'}>
+                  اگر نتوانیم آن را انجام دهیم، آیا می‌توان فطریه را به یک بدهکار
+                  ورشکسته داد؟
+                </Text>
+                <Badge
+                  bgColor={"#23D9D7"}
+                  padding={"5px"}
+                  borderRadius={"5px"}
+                  color={"white"}
+                >
+                  3 پاسخ
+                </Badge>
+              </HStack>
+              <Divider borderColor={"gray.200"} />
+              <HStack>
+                <Text color={'black'}>
+                  اگر نتوانیم آن را انجام دهیم، آیا می‌توان فطریه را به یک بدهکار
+                  ورشکسته داد؟
+                </Text>
+                <Badge
+                  bgColor={"#23D9D7"}
+                  padding={"5px"}
+                  borderRadius={"5px"}
+                  color={"white"}
+                >
+                  3 پاسخ
+                </Badge>
+              </HStack>
+              <Divider borderColor={"gray.200"} />
+              <HStack>
+                <Text color={'black'}>
+                  اگر نتوانیم آن را انجام دهیم، آیا می‌توان فطریه را به یک بدهکار
+                  ورشکسته داد؟
+                </Text>
+                <Badge
+                  bgColor={"#23D9D7"}
+                  padding={"5px"}
+                  borderRadius={"5px"}
+                  color={"white"}
+                >
+                  3 پاسخ
+                </Badge>
+              </HStack>
+              <Divider borderColor={"gray.200"} />
+              <HStack>
+                <Text color={'black'}>
+                  اگر نتوانیم آن را انجام دهیم، آیا می‌توان فطریه را به یک بدهکار
+                  ورشکسته داد؟
+                </Text>
+                <Badge
+                  bgColor={"#23D9D7"}
+                  padding={"5px"}
+                  borderRadius={"5px"}
+                  color={"white"}
+                >
+                  3 پاسخ
+                </Badge>
+              </HStack>
+              <Divider borderColor={"gray.200"} />
+              <HStack>
+                <Text color={'black'}>
+                  اگر نتوانیم آن را انجام دهیم، آیا می‌توان فطریه را به یک بدهکار
+                  ورشکسته داد؟
+                </Text>
+                <Badge
+                  bgColor={"#23D9D7"}
+                  padding={"5px"}
+                  borderRadius={"5px"}
+                  color={"white"}
+                >
+                  3 پاسخ
+                </Badge>
+              </HStack>
+            </VStack>
             <HStack w={"100%"} justifyContent={"end"} mt={"20px"}>
               <Button bgColor={"#23D9D7"}>مرحله بعد</Button>
             </HStack>
@@ -353,7 +351,7 @@ const Index = () => {
             color={'black'}
           >
             <Text fontWeight={"bold"} fontSize={"18px"}>
-            برچسب‌های سؤال
+              برچسب‌های سؤال
             </Text>
             <Text>
               لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ

@@ -3,6 +3,8 @@ import {
   Box,
   Button,
   Container,
+  Grid,
+  GridItem,
   HStack,
   IconButton,
   Image,
@@ -14,11 +16,17 @@ import {
   MenuButton,
   MenuItem,
   MenuList,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalOverlay,
   Stack,
   Text,
   UnorderedList,
   useDisclosure,
-  VStack,
+  VStack
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -53,11 +61,11 @@ const menuList = [
 const MainLayout = ({ children }) => {
   const router = useRouter();
   const [isSticky, setIsSticky] = useState(false);
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   const { data: dataHistoric, isLoading: isLoadingHistoric } =
     useSWR("to_text/histories");
 
-  const { onOpen, isOpen, onClose } = useDisclosure();
 
   const handleButtonClick = (link) => {
     router.replace(link);
@@ -89,6 +97,11 @@ const MainLayout = ({ children }) => {
   const handleBuy = () => {
     onOpen();
   };
+
+  const handleClickSearch = () => {
+    onOpen()
+  }
+
   return (
     <VStack minHeight="100vh" w={"100%"} alignItems={"start"} gap={0}>
       {/* header */}
@@ -117,11 +130,11 @@ const MainLayout = ({ children }) => {
         >
           <HStack w={"100%"} alignItems={"center"} height={"100%"}>
             <HStack ml={"20px"}>
-              <Image src="./question.png" width={"40px"} height={"56px"} />
-              <Image src="./parsaheader.png" width={"91px"} height={"37px"} />
+              <Image src="../../question.png" width={"40px"} height={"56px"} />
+              <Image src="../../parsaheader.png" width={"91px"} height={"37px"} />
             </HStack>
             <InputGroup width={"327px"}>
-              <Input height={"46px"} />
+              <Input height={"46px"} placeholder="جستجو" onClick={handleClickSearch} />
               <InputRightElement h="100%">
                 <IoSearch
                   fontSize="20px"
@@ -181,163 +194,166 @@ const MainLayout = ({ children }) => {
         {/* Main content area */}
         <VStack height={"calc( 100vh - 76px )"} w={"100%"} gap={0} >
           {children}
-          <Stack w={"100%"} height={"427px"} bg="#F7F7F7" alignItems={'center'}>
+          <Stack w={"100%"} height={"427px"} bg="#F7F7F7" alignItems={'center'} >
             <Box
+              maxW="container.xl"
               as="footer"
-              p={4}
               textAlign="center"
-              w={"80%"}
               height={"427px"}
               bg="#F7F7F7"
+              w="100%"
+              alignItems={"center"}
+              justifyContent={"center"}
+              mx="auto"
+              p={"20px"}
             >
-              <Container maxW="80%" mx="auto" py={4} height={"427px"}>
-                <HStack
-                  height={"100%"}
-                  alignItems={"start"}
-                  justifyContent={"space-between"}
-                >
-                  <VStack alignItems={"center"} gap={"20px"} height={"100%"}>
-                    <Image
-                      src="./question.png"
-                      width={"51px"}
-                      height={"72px"}
-                    />
-                    <Image
-                      src="./parsaheader.png"
-                      width={"118px"}
-                      height={"48px"}
-                    />
-                    <Text w={"326px"} fontSize={"16px"}>
-                      پارسا موتور جستجوی پرسش و پاسخ‌های حوزه علوم اسلامی به
-                      زبان‌های مختلف از منابع معتبر است؛که هدف آن افزایش دانش و
-                      دسترسی ساخت یافته مخاطبین به پرسش و پاسخ‌های دینی است.
-                    </Text>
-                  </VStack>
-                  <VStack alignItems={"start"} gap={"20px"} height={"100%"}>
-                    <Text
-                      color={"#3646B3"}
-                      fontSize={"20px"}
-                      fontWeight={"bold"}
-                    >
-                      پارسا
-                    </Text>
-                    <UnorderedList
-                      textAlign={"start"}
-                      spacing={"10px"}
-                      sx={{
-                        li: {
-                          color: "black", // text color
-                          "::marker": {
-                            color: "#29CCCC", // 🔵 your custom bullet color
-                          },
+              <HStack
+                height={"100%"}
+                alignItems={"start"}
+                justifyContent={"space-between"}
+                gap={'40px'}
+              >
+                <VStack alignItems={"center"} gap={"20px"} height={"100%"}>
+                  <Image
+                    src="../../question.png"
+                    width={"51px"}
+                    height={"72px"}
+                  />
+                  <Image
+                    src="../../parsaheader.png"
+                    width={"118px"}
+                    height={"48px"}
+                  />
+                  <Text w={"326px"} fontSize={"16px"}>
+                    پارسا موتور جستجوی پرسش و پاسخ‌های حوزه علوم اسلامی به
+                    زبان‌های مختلف از منابع معتبر است؛که هدف آن افزایش دانش و
+                    دسترسی ساخت یافته مخاطبین به پرسش و پاسخ‌های دینی است.
+                  </Text>
+                </VStack>
+                <VStack alignItems={"start"} gap={"20px"} height={"100%"} w={'100%'}>
+                  <Text
+                    color={"#3646B3"}
+                    fontSize={"20px"}
+                    fontWeight={"bold"}
+                  >
+                    پارسا
+                  </Text>
+                  <UnorderedList
+                    textAlign={"start"}
+                    spacing={"10px"}
+                    sx={{
+                      li: {
+                        color: "black", // text color
+                        "::marker": {
+                          color: "#29CCCC", // 🔵 your custom bullet color
                         },
-                      }}
-                    >
-                      <ListItem>خانه</ListItem>
-                      <ListItem>سؤالات</ListItem>
-                      <ListItem>برچسب‌ها</ListItem>
-                      <ListItem>کاربران</ListItem>
-                      <ListItem>درباره‌ما</ListItem>
-                      <ListItem>ارتباط با ما</ListItem>
-                      <ListItem>قوانین استفاده</ListItem>
-                      <ListItem fontWeight={"thin"}>سیاست حریم خصوصی</ListItem>
-                    </UnorderedList>
-                  </VStack>
-                  <VStack alignItems={"start"} gap={"20px"} height={"100%"}>
-                    <Text
-                      color={"#3646B3"}
-                      fontSize={"20px"}
-                      fontWeight={"bold"}
-                    >
-                      محصولات
-                    </Text>
-                    <UnorderedList
-                      textAlign={"start"}
-                      spacing={"10px"}
-                      sx={{
-                        li: {
-                          color: "black", // text color
-                          "::marker": {
-                            color: "#29CCCC", // 🔵 your custom bullet color
-                          },
+                      },
+                    }}
+                  >
+                    <ListItem>خانه</ListItem>
+                    <ListItem>سؤالات</ListItem>
+                    <ListItem>برچسب‌ها</ListItem>
+                    <ListItem>کاربران</ListItem>
+                    <ListItem>درباره‌ما</ListItem>
+                    <ListItem>ارتباط با ما</ListItem>
+                    <ListItem>قوانین استفاده</ListItem>
+                    <ListItem fontWeight={"thin"}>سیاست حریم خصوصی</ListItem>
+                  </UnorderedList>
+                </VStack>
+                <VStack w={'100%'} alignItems={"start"} gap={"20px"} height={"100%"}>
+                  <Text
+                    color={"#3646B3"}
+                    fontSize={"20px"}
+                    fontWeight={"bold"}
+                  >
+                    محصولات
+                  </Text>
+                  <UnorderedList
+                    textAlign={"start"}
+                    spacing={"10px"}
+                    sx={{
+                      li: {
+                        color: "black", // text color
+                        "::marker": {
+                          color: "#29CCCC", // 🔵 your custom bullet color
                         },
-                      }}
-                    >
-                      <ListItem>موتور جستجو هوشمند سوالات</ListItem>
-                      <ListItem>سرویس جستجوی سوال مشابه</ListItem>
-                      <ListItem>سرویس اصلاح خطای نوشتاری</ListItem>
-                      <ListItem>سرویس توصیه گر سوال</ListItem>
-                      <ListItem>سرویس استخراج عبارات کلیدی</ListItem>
-                      <ListItem>سرویس خلاصه سازی متن سوال</ListItem>
-                      <ListItem>سرویس رده بندی متن سوالات</ListItem>
-                      <ListItem>سرویس پاسخ به سوالات دامنه باز</ListItem>
-                    </UnorderedList>
-                  </VStack>
-                  <VStack alignItems={"start"} gap={"20px"} height={"100%"}>
+                      },
+                    }}
+                  >
+                    <ListItem>موتور جستجو هوشمند سوالات</ListItem>
+                    <ListItem>سرویس جستجوی سوال مشابه</ListItem>
+                    <ListItem>سرویس اصلاح خطای نوشتاری</ListItem>
+                    <ListItem>سرویس توصیه گر سوال</ListItem>
+                    <ListItem>سرویس استخراج عبارات کلیدی</ListItem>
+                    <ListItem>سرویس خلاصه سازی متن سوال</ListItem>
+                    <ListItem>سرویس رده بندی متن سوالات</ListItem>
+                    <ListItem>سرویس پاسخ به سوالات دامنه باز</ListItem>
+                  </UnorderedList>
+                </VStack>
+                <VStack alignItems={"start"} gap={"20px"} height={"100%"} w={'100%'}>
+                  <Text
+                    color={"#3646B3"}
+                    fontSize={"20px"}
+                    fontWeight={"bold"}
+                  >
+                    ارتباط با ما
+                  </Text>
+                  <HStack w={"100%"} alignItems={"start"} textAlign={"start"}>
+                    <IconButton
+                      icon={<IoLocation color="#29CCCC" fontSize={"20px"} />}
+                    />
+                    <Text width={"auto"}>
+                      مازندران، بابل، یوسف پوری، خیابان آیت الله سعیدی، کوچه
+                      پرستو، پلاک ۷
+                    </Text>
+                  </HStack>
+                  <HStack>
+                    <IconButton
+                      icon={<IoCall color="#29CCCC" fontSize={"20px"} />}
+                    />
+                    <Text>۰۹۱۱۱۱۶۹۱۵۶</Text>
+                  </HStack>
+                  <VStack alignItems={"start"}>
                     <Text
                       color={"#3646B3"}
                       fontSize={"20px"}
                       fontWeight={"bold"}
                     >
-                      ارتباط با ما
+                      شبکه های اجتماعی
                     </Text>
-                    <HStack w={"100%"} alignItems={"start"} textAlign={"start"}>
-                      <IconButton
-                        icon={<IoLocation color="#29CCCC" fontSize={"20px"} />}
-                      />
-                      <Text width={"284px"}>
-                        مازندران، بابل، یوسف پوری، خیابان آیت الله سعیدی، کوچه
-                        پرستو، پلاک ۷
-                      </Text>
-                    </HStack>
                     <HStack>
                       <IconButton
-                        icon={<IoCall color="#29CCCC" fontSize={"20px"} />}
+                        icon={
+                          <IoLogoTwitter color="#29CCCC" fontSize={"20px"} />
+                        }
                       />
-                      <Text>۰۹۱۱۱۱۶۹۱۵۶</Text>
+                      <IconButton
+                        icon={
+                          <IoLogoInstagram
+                            color="#29CCCC"
+                            fontSize={"20px"}
+                          />
+                        }
+                      />
+                      <IconButton
+                        icon={
+                          <FaTelegram color="#29CCCC" fontSize={"20px"} />
+                        }
+                      />
+                      <IconButton
+                        icon={
+                          <IoLogoYoutube color="#29CCCC" fontSize={"20px"} />
+                        }
+                      />
+                      <IconButton
+                        icon={
+                          <IoLogoLinkedin color="#29CCCC" fontSize={"20px"} />
+                        }
+                      />
                     </HStack>
-                    <VStack alignItems={"start"}>
-                      <Text
-                        color={"#3646B3"}
-                        fontSize={"20px"}
-                        fontWeight={"bold"}
-                      >
-                        شبکه های اجتماعی
-                      </Text>
-                      <HStack>
-                        <IconButton
-                          icon={
-                            <IoLogoTwitter color="#29CCCC" fontSize={"20px"} />
-                          }
-                        />
-                        <IconButton
-                          icon={
-                            <IoLogoInstagram
-                              color="#29CCCC"
-                              fontSize={"20px"}
-                            />
-                          }
-                        />
-                        <IconButton
-                          icon={
-                            <FaTelegram color="#29CCCC" fontSize={"20px"} />
-                          }
-                        />
-                        <IconButton
-                          icon={
-                            <IoLogoYoutube color="#29CCCC" fontSize={"20px"} />
-                          }
-                        />
-                        <IconButton
-                          icon={
-                            <IoLogoLinkedin color="#29CCCC" fontSize={"20px"} />
-                          }
-                        />
-                      </HStack>
-                    </VStack>
                   </VStack>
-                </HStack>
-              </Container>
+                </VStack>
+              </HStack>
             </Box>
           </Stack>
 
@@ -355,6 +371,34 @@ const MainLayout = ({ children }) => {
           </Box>
         </VStack>
       </HStack>
+
+      <Modal isOpen={isOpen} onClose={onClose}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalCloseButton />
+          <ModalBody>
+            <Grid templateColumns="repeat(2, 1fr)" gap={"2px"} w={"100%"}>
+              <GridItem>
+                <VStack>
+                  <Text>جستجوی پیشرفته</Text>
+                  <Text>نتایج دقیق‌تر و مرتبط‌تر با جستجوی پیشرفته</Text>
+                </VStack>
+              </GridItem>
+              <GridItem>
+
+              </GridItem>
+            </Grid>
+          </ModalBody>
+
+          <ModalFooter>
+            <Button colorScheme="blue" mr={3} onClick={onClose}>
+              Close
+            </Button>
+            <Button variant="ghost">Secondary Action</Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+
     </VStack>
   );
 };

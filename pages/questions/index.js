@@ -7,9 +7,9 @@ import {
   AccordionPanel,
   Box,
   Button,
-  Container,
   Divider,
-  Flex,
+  Grid,
+  GridItem,
   HStack,
   IconButton,
   Text,
@@ -22,7 +22,6 @@ import "slick-carousel/slick/slick.css";
 
 import LeftSidebar from "@/components/home/leftsidebar";
 import QuestionCard from "@/components/questionCars";
-import SliderCom from "@/components/slider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -67,13 +66,21 @@ const Index = ({ children }) => {
 
   return (
     <MainLayout>
-      <Container maxW="80%" mx="auto" py={4} marginTop={"100px"}>
-
-        <Flex direction="row" width="100%" >
+      <Box
+        w="100%"
+        alignItems={"center"}
+        justifyContent={"center"}
+        maxW="container.xl"
+        mx="auto"
+        p={"20px"}
+        mt={'100px'}
+      >
+        <Grid templateColumns="repeat(4, 1fr)" gap={"20px"} w={"100%"}>
           {/* Right Sidebar */}
           <Box
             zIndex={100}
-            w="20%"
+            as={GridItem}
+            colSpan={'1'}
             border={"1px"}
             borderColor={"#EBEBEB"}
             borderRadius={"15px"}
@@ -154,7 +161,7 @@ const Index = ({ children }) => {
           </Box>
 
           {/* Main Content */}
-          <Box flex="1" p="6" w="60%" >
+          <Box p="6" as={GridItem} colSpan={'2'}>
             <HStack
               w={"100%"}
               justifyContent={"space-between"}
@@ -195,13 +202,10 @@ const Index = ({ children }) => {
             <Divider my={"20px"} />
             <QuestionCard />
             <Divider my={"20px"} />
-
-            <SliderCom items={items} height={'380px'} borderRadius={'100%'} />
-            <SliderCom items={items2} height={'270px'} width="350px" borderRadius={'0px'} />
           </Box>
 
           {/* Left Sidebar */}
-          <Box w="20%" height={"500px"}>
+          <Box as={GridItem} colSpan={'1'} >
             <Box
               w={'100%'}
               p="4"
@@ -248,8 +252,8 @@ const Index = ({ children }) => {
               </Text>
             </Box>
           </Box>
-        </Flex>
-      </Container>
+        </Grid>
+      </Box>
 
     </MainLayout >
   );
