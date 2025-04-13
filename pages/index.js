@@ -8,9 +8,9 @@ import {
   AccordionPanel,
   Box,
   Button,
-  Container,
   Divider,
-  Flex,
+  Grid,
+  GridItem,
   HStack,
   Text,
   VStack
@@ -68,13 +68,22 @@ export default function Home({ children }) {
   return (
     <MainLayout>
       <Header />
-      <Container maxW="80%" mx="auto" py={4}>
 
-        <Flex direction="row" width="100%" >
+      <Box
+        w="100%"
+        alignItems={"center"}
+        justifyContent={"center"}
+        maxW="container.xl"
+        mx="auto"
+        p={"20px"}
+      >
+        <Grid templateColumns="repeat(4, 1fr)" gap={"20px"} w={"100%"}>
+
           {/* Right Sidebar */}
           <Box
+            as={GridItem}
+            colSpan={'1'}
             zIndex={100}
-            w="20%"
             border={"1px"}
             borderColor={"#EBEBEB"}
             borderRadius={"15px"}
@@ -155,7 +164,8 @@ export default function Home({ children }) {
           </Box>
 
           {/* Main Content */}
-          <Box flex="1" p="6" w="60%" >
+          <Box p="6" as={GridItem}
+            colSpan={'2'}>
             <HStack
               w={"100%"}
               justifyContent={"space-between"}
@@ -182,12 +192,12 @@ export default function Home({ children }) {
             <QuestionCard />
             <Divider my={"20px"} />
 
-            <SliderCom items={items} height={'380px'} borderRadius={'100%'} />
-            <SliderCom items={items2} height={'270px'} width="350px" borderRadius={'0px'} />
+
           </Box>
 
           {/* Left Sidebar */}
-          <Box w="20%" height={"500px"}>
+          <Box height={"500px"} as={GridItem}
+            colSpan={'1'}>
             <Box
               w={'100%'}
               p="4"
@@ -234,8 +244,12 @@ export default function Home({ children }) {
               </Text>
             </Box>
           </Box>
-        </Flex>
-      </Container>
+          <GridItem colSpan={'3'} w={'100%'}>
+            <SliderCom items={items} height={'380px'} borderRadius={'100%'} />
+            <SliderCom items={items2} height={'270px'} width="350px" borderRadius={'0px'} />
+          </GridItem>
+        </Grid>
+      </Box>
 
     </MainLayout >
   );
