@@ -8,7 +8,7 @@ const sliderSettings = {
   dots: true,
   infinite: true,
   speed: 500,
-  slidesToShow: 3, // or 1 or 2
+  slidesToShow: 2, // or 1 or 2
   slidesToScroll: 1,
   rtl: false, // for RTL support
 };

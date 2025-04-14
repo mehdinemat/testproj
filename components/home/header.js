@@ -1,4 +1,3 @@
-import MainLayout from "@/components/mainLayout";
 import {
   Box,
   Center,
@@ -72,7 +71,7 @@ const Header = ({ children }) => {
 
   return (
     <Box
-      marginTop={"100px"}
+      marginTop={{ base: '60px', md: "100px" }}
       as={Stack}
       justifyContent={"center"}
       alignItems={"center"}
@@ -89,7 +88,7 @@ const Header = ({ children }) => {
       bgPosition="center"
     >
       <HStack
-      height={"500px"}
+        height={"500px"}
         as={Container}
         maxW="5xl"
         w={"100%"}
@@ -102,13 +101,13 @@ const Header = ({ children }) => {
           justifyContent={"center"}
           height={"100%"}
         >
-          <Text fontSize={"50px"} color={"white"}>
+          <Text fontSize={{ base: '35px', md: "50px" }} color={"white"} textAlign={{ base: 'center', md: 'right' }} >
             پارسا شبکه اجتماعی پرسش و پاسخ دینی
           </Text>
-          <InputGroup height="60px" width="890px" my={"20px"}>
+          <InputGroup height="60px" width={{ base: '381px', md: "890px" }} my={"20px"}>
             <Input
               borderRadius={"10px"}
-              width="100%"
+              width={{ base: '381px', md: "100%" }}
               bgColor="#2A378C"
               height="60px"
               placeholder="در میان هزاران پرسش و پاسخ جستجو کنید..."

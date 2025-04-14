@@ -20,6 +20,7 @@ import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
 
 import LeftSidebar from "@/components/home/leftsidebar";
+import QuestionMCard from "@/components/home/mobile/questionMCard";
 import QuestionCard from "@/components/questionCars";
 import SliderCom from "@/components/slider";
 
@@ -68,7 +69,6 @@ export default function Home({ children }) {
   return (
     <MainLayout>
       <Header />
-
       <Box
         w="100%"
         alignItems={"center"}
@@ -77,12 +77,17 @@ export default function Home({ children }) {
         mx="auto"
         p={"20px"}
       >
-        <Grid templateColumns="repeat(4, 1fr)" gap={"20px"} w={"100%"}>
+        <Grid templateColumns={{ base: "repeat(1, 1fr)", md: "repeat(4, 1fr)" }}
+          templateAreas={{
+            base: `"main" "right" "left" "slider"`,
+          }} gap={"20px"} w={"100%"} >
 
           {/* Right Sidebar */}
-          <Box
-            as={GridItem}
-            colSpan={'1'}
+          <Box area="right" w="100%"
+            maxW={{ base: "calc( 100vw - 50px )", md: '100vw' }}
+            overflow="hidden"
+            wordBreak="break-word"
+            order={{ base: 2, md: 1 }}
             zIndex={100}
             border={"1px"}
             borderColor={"#EBEBEB"}
@@ -164,10 +169,15 @@ export default function Home({ children }) {
           </Box>
 
           {/* Main Content */}
-          <Box p="6" as={GridItem}
-            colSpan={'2'}>
-            <HStack
-              w={"100%"}
+          <Box p="6" order={{ base: 1, md: 2 }} as={GridItem}
+            area="main" colSpan={{ md: 2 }} w="100%" overflowWrap="break-word"
+            wordBreak="break-word"
+            maxW="100vw"
+            whiteSpace="normal"
+            pr={{ base: 0, md: '21px' }}
+          >
+
+            <HStack w="100%" whiteSpace="normal"
               justifyContent={"space-between"}
               mb={"10px"}
               alignItems={"start"}
@@ -186,18 +196,30 @@ export default function Home({ children }) {
               </Button>
             </HStack>
 
-            <Divider my={"20px"} />
-            <QuestionCard />
-            <Divider my={"20px"} />
-            <QuestionCard />
-            <Divider my={"20px"} />
-
+            <VStack display={{ base: 'none', md: 'flex' }}>
+              <Divider my={"20px"} />
+              <QuestionCard />
+              <Divider my={"20px"} />
+              <QuestionCard />
+              <Divider my={"20px"} />
+            </VStack>
+            <VStack display={{ base: 'flex', md: 'none' }}>
+              <Divider my={"20px"} />
+              <QuestionMCard />
+              <Divider my={"20px"} />
+              <QuestionMCard />
+              <Divider my={"20px"} />
+            </VStack>
 
           </Box>
 
           {/* Left Sidebar */}
-          <Box height={"500px"} as={GridItem}
-            colSpan={'1'}>
+          <Box order={3} as={GridItem}
+            colSpan={'1'} w="100%" area="left"
+            maxW={{ base: "calc( 100vw - 50px )", md: '100vw' }}
+
+            whiteSpace="normal"
+            overflowWrap="break-word">
             <Box
               w={'100%'}
               p="4"
@@ -227,7 +249,6 @@ export default function Home({ children }) {
               border={"1px"}
               borderColor={"#EBEBEB"}
               borderRadius={"15px"}
-              height={"500px"}
               bgColor={"#CFF186"}
             >
               <Text fontWeight={"bold"} fontSize={"16px"}>
@@ -244,7 +265,10 @@ export default function Home({ children }) {
               </Text>
             </Box>
           </Box>
-          <GridItem colSpan={'3'} w={'100%'} >
+          <GridItem order={4} area="slider" colSpan={{ md: 3 }} w={'100%'}
+            maxW={{ base: "calc( 100vw - 50px )", md: '100vw' }}
+            whiteSpace="normal"
+            overflowWrap="break-word">
             <SliderCom items={items} height={'380px'} borderRadius={'100%'} title={'مراجع'} />
             <SliderCom items={items2} height={'270px'} width="350px" borderRadius={'0px'} title={'حامیان پارسا'} />
           </GridItem>

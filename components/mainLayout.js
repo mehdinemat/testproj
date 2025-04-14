@@ -2,7 +2,9 @@ import {
   Avatar,
   Box,
   Button,
+  Collapse,
   Container,
+  Fade,
   Grid,
   GridItem,
   HStack,
@@ -29,7 +31,7 @@ import {
   VStack
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { FaTelegram } from "react-icons/fa";
 import { GiDiamondRing } from "react-icons/gi";
 import {
@@ -38,10 +40,11 @@ import {
   IoLogoInstagram,
   IoLogoLinkedin,
   IoLogoTwitter,
-  IoLogoYoutube,
+  IoLogoYoutube
 } from "react-icons/io";
-import { IoCall, IoLocation, IoSearch } from "react-icons/io5";
+import { IoCall, IoExitOutline, IoLocation, IoSearch } from "react-icons/io5";
 import useSWR from "swr";
+import MenuBar from "./mobile/menuBar";
 
 const menuList = [
   {
@@ -62,7 +65,8 @@ const MainLayout = ({ children }) => {
   const router = useRouter();
   const [isSticky, setIsSticky] = useState(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
-
+  const [showInput, setShowInput] = useState(false);
+  const inputRef = useRef(null);
   const { data: dataHistoric, isLoading: isLoadingHistoric } =
     useSWR("to_text/histories");
 
@@ -102,6 +106,14 @@ const MainLayout = ({ children }) => {
     onOpen()
   }
 
+  const handleToggle = () => {
+    setShowInput((prev) => !prev);
+    setTimeout(() => {
+      inputRef.current?.focus();
+    }, 300); // Give time for animation
+  };
+
+
   return (
     <VStack minHeight="100vh" w={"100%"} alignItems={"start"} gap={0}>
       {/* header */}
@@ -112,12 +124,12 @@ const MainLayout = ({ children }) => {
         left={0}
         zIndex={999} // 👈 Ensure it stays on top
         width="100%"
-        height="100px"
+        height={{ base: '60px', md: "100px" }}
         alignItems={"center"}
         justifyContent={"center"}
         bg="white"
         p={2}
-        px={4}
+        px={{ base: 0, mode: 4 }}
         borderBottom="1px"
         borderBottomColor="gray.200"
       >
@@ -126,31 +138,69 @@ const MainLayout = ({ children }) => {
           maxW="container.xl"
           w={"100%"}
           alignItems={"center"}
+          pr={{ base: 0, md: '14px' }}
           justifyContent={"space-between"}
         >
-          <HStack w={"100%"} alignItems={"center"} height={"100%"}>
-            <HStack ml={"20px"}>
-              <Image src="../../question.png" width={"40px"} height={"56px"} />
-              <Image src="../../parsaheader.png" width={"91px"} height={"37px"} />
+          <HStack w={"100%"} alignItems={"center"} height={"100%"} justifyContent={'space-between'}>
+            <HStack ml={"20px"} w={'100%'}>
+              <MenuBar />
+              <Image src="../../question.png" width={{ base: '25px', md: "40px" }} height={{ base: '35px', md: "56px" }} />
+              <Image src="../../parsaheader.png" width={{ base: '57px', md: "91px" }} height={{ base: '23px', md: "37px" }} />
+              <InputGroup width={"327px"} display={{ base: "none", md: "block" }}
+              >
+                <Input height={"46px"} placeholder="جستجو" onClick={handleClickSearch} />
+                <InputRightElement h="100%">
+                  <IoSearch
+                    fontSize="20px"
+                    style={{ marginTop: "2px" }}
+                    color="#29CCCC"
+                  />
+                </InputRightElement>
+              </InputGroup>
             </HStack>
-            <InputGroup width={"327px"}>
-              <Input height={"46px"} placeholder="جستجو" onClick={handleClickSearch} />
-              <InputRightElement h="100%">
-                <IoSearch
+            <HStack w={'100%'} justifyContent={'end'} alignItems={'end'} display={{ base: "flex", md: "none" }}>
+              <Fade in={!showInput}>
+
+                {!showInput && <IconButton
+                  icon={<IoSearch color="#29CCCC" />}
+                  aria-label="Search"
                   fontSize="20px"
-                  style={{ marginTop: "2px" }}
-                  color="#29CCCC"
-                />
-              </InputRightElement>
-            </InputGroup>
+                  variant="ghost"
+                  onClick={handleToggle}
+                  transition="all 0.3s ease"
+                />}
+              </Fade>
+
+              <Collapse in={showInput} animateOpacity style={{ marginLeft: 8 }}>
+                <InputGroup size="md" w="150px">
+                  <Input
+                    ref={inputRef}
+                    placeholder="جستجو..."
+                    variant="filled"
+                    bg="white"
+                    borderRadius="md"
+                    onBlur={() => setShowInput(false)} // Optional: hide on blur
+                  />
+                  <InputRightElement>
+                    <IoSearch color="gray.500" />
+                  </InputRightElement>
+                </InputGroup>
+              </Collapse>
+              <IconButton
+                icon={<IoExitOutline color="#29CCCC" />}
+                aria-label="Search"
+                fontSize="20px"
+                variant="ghost"
+              />
+            </HStack>
           </HStack>
-          <HStack spacing={4}>
+          <HStack spacing={4} display={{ base: 'none', md: 'flex' }}>
             {menuList?.map((item) => (
               <Text textAlign={"center"} w={"80px"}>
                 {item?.title}
               </Text>
             ))}
-            <Menu>
+            <Menu >
               <MenuButton px={4} py={2} transition="all 0.2s">
                 <HStack>
                   <Text>فارسی</Text>
@@ -194,12 +244,12 @@ const MainLayout = ({ children }) => {
         {/* Main content area */}
         <VStack height={"calc( 100vh - 76px )"} w={"100%"} gap={0} >
           {children}
-          <Stack w={"100%"} height={"427px"} bg="#F7F7F7" alignItems={'center'} >
+          <Stack w={"100%"} bg="#F7F7F7" alignItems={'center'} >
             <Box
               maxW="container.xl"
               as="footer"
               textAlign="center"
-              height={"427px"}
+
               bg="#F7F7F7"
               w="100%"
               alignItems={"center"}
@@ -207,13 +257,14 @@ const MainLayout = ({ children }) => {
               mx="auto"
               p={"20px"}
             >
-              <HStack
+              <Stack
+                direction={{ base: 'column', md: 'row' }}
                 height={"100%"}
                 alignItems={"start"}
                 justifyContent={"space-between"}
                 gap={'40px'}
               >
-                <VStack alignItems={"center"} gap={"20px"} height={"100%"}>
+                <VStack alignItems={"center"} gap={"20px"} height={"100%"} w={'100%'}>
                   <Image
                     src="../../question.png"
                     width={"51px"}
@@ -353,7 +404,7 @@ const MainLayout = ({ children }) => {
                     </HStack>
                   </VStack>
                 </VStack>
-              </HStack>
+              </Stack>
             </Box>
           </Stack>
 

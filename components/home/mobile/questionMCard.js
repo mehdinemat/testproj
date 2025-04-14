@@ -1,11 +1,11 @@
-import { Avatar, AvatarGroup, Badge, Divider, HStack, Text, VStack } from "@chakra-ui/react";
+import { Avatar, AvatarGroup, Badge, HStack, Text, VStack } from "@chakra-ui/react";
 import { HiArrowTurnDownLeft } from "react-icons/hi2";
-import { IoCheckmark, IoEye } from "react-icons/io5";
+import { IoCheckmark, IoEyeOutline } from "react-icons/io5";
 
-const QuestionCard = () => {
+const QuestionMCard = () => {
   return (
-    <HStack w={"100%"} alignItems={"start"}>
-      <VStack w={"150px"} alignItems={"start"}>
+    <VStack w={"calc( 100vw - 50px )"} alignItems={"start"}>
+      <HStack alignItems={"start"} gap={'10px'}>
         <HStack color={"gray.600"}>
           <HiArrowTurnDownLeft fontSize={"20px"} />
           <Text fontSize={'md'}>2پسند</Text>
@@ -15,11 +15,11 @@ const QuestionCard = () => {
           <Text>3 جواب</Text>
         </HStack>
         <HStack color={"gray.600"}>
-          <IoEye fontSize={"20px"} />
+          <IoEyeOutline fontSize={"20px"} />
           <Text>87 بازدید</Text>
         </HStack>
         <HStack></HStack>
-      </VStack>
+      </HStack>
       <VStack w={"100%"} alignItems={"start"} gap={"20px"}>
         <Text fontSize={'15px'} w="100%" whiteSpace="normal">
           آیا می‌توان نذر کرد که فطریه را به زلزله زده‌گان داد؟ اگر
@@ -79,18 +79,13 @@ const QuestionCard = () => {
               اسلام کوئست
             </Text>
           </HStack>
-          <Divider
+          {/* <Divider
             orientation="vertical"
             w={"5px"}
             borderColor={"gray.400"}
             height={"40px"}
           />
-          <HStack>
-            <Avatar size={"sm"} />
-            <Text color={"gray.700"} w={"100px"}>
-              اسلام کوئست
-            </Text>
-          </HStack>
+          */}
 
           <HStack w={"100%"} justifyContent={"end"}>
             <Text w={"120px"} color={"gray.400"}>
@@ -121,8 +116,8 @@ const QuestionCard = () => {
           </HStack>
         </HStack>
       </VStack>
-    </HStack>
+    </VStack>
   )
 }
 
-export default QuestionCard
+export default QuestionMCard
