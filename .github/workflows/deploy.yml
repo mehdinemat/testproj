@@ -15,16 +15,11 @@ jobs:
 
       - name: Set up SSH
         run: |
-          echo "${{ secrets.SSH_PRIVATE_KEY }}"
           mkdir -p ~/.ssh
           chmod 700 ~/.ssh
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
-
-          # Debug the SSH setup
-          ls -al ~/.ssh
-          cat ~/.ssh/id_rsa
       
       - name: Deploy to server
         run: |
