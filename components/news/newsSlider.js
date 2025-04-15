@@ -4,6 +4,7 @@ import {
   Flex,
   HStack,
   Image,
+  Stack,
   Text,
   VStack
 } from "@chakra-ui/react";
@@ -48,7 +49,7 @@ const NewsSlider = () => {
       justifyContent={"center"}
       maxW="container.xl"
       mx="auto"
-      p={"60px"}
+      p={{ base: '20px', md: "60px" }}
       height={"100%"}
       my={"20px"}
     >
@@ -64,18 +65,20 @@ const NewsSlider = () => {
             justifyContent="space-between"
             alignItems="center"
           >
-            <HStack dir="rtl">
-              <VStack w={'100%'} alignItems={'start'}>
-                <Text fontSize={'24px'} fontWeight={'bold'} color={'white'} w={'180px'} textAlign={'start'}>موتور جستجو هوشمند سؤالات</Text>
-                <Text w={'500px'} fontSize={'16px'} textAlign={'start'} color={'white'}>
+            <Stack direction={{ base: 'column', md: 'row' }} dir="rtl">
+              <VStack w={'100%'} alignItems={{ baes: 'center', md: 'start' }} order={{ base: 2, md: 1 }}>
+                <Text fontSize={'24px'} fontWeight={'bold'} color={'white'} w={{ base: 'auto', md: '280px' }} textAlign={{ base: 'center', md: 'start' }}>موتور جستجو هوشمند سؤالات</Text>
+                <Text w={{ base: 'auto', md: '500px' }} fontSize={'16px'} textAlign={{ base: 'center', md: 'start' }} color={'white'}>
                   لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و
                   با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و
                   مجله در ستون و سطرآنچنان که لازم است
                 </Text>
-                <Button bgColor={'#29CCCC'} fontWeight={'normal'} mt={'20px'}>ادامه خبر</Button>
+                <HStack w={'100%'} justifyContent={{ base: 'center', md: 'start' }}>
+                  <Button bgColor={'#29CCCC'} fontWeight={'normal'} mt={'20px'} w={'80px'}>ادامه خبر</Button>
+                </HStack>
               </VStack>
-              <Image src="./newsslider.png" w={'560px'} h={'410px'} />
-            </HStack>
+              <Image src="./newsslider.png" w={{ base: '356', md: '560px' }} h={{ base: '262px', md: '410px' }} order={{ base: 1, md: 2 }} />
+            </Stack>
           </Flex>
         ))}
       </Slider>

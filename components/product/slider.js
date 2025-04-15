@@ -1,25 +1,32 @@
-import { Avatar, Box, Button, Flex, HStack, IconButton, Text, VStack } from "@chakra-ui/react";
+import { Avatar, Box, Button, Flex, HStack, IconButton, Text, useBreakpointValue, VStack } from "@chakra-ui/react";
 import { IoArrowBack } from "react-icons/io5";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
 
 
-const sliderSettings = {
-  dots: true,
-  infinite: true,
-  speed: 500,
-  slidesToShow: 4, // or 1 or 2
-  slidesToScroll: 1,
-  rtl: false, // for RTL support
-};
+
 
 
 
 
 const SliderProduct = ({ items, height, borderRadius, width = 'auto', title }) => {
+
+  const slidesToShow = useBreakpointValue({ base: 1, md: 2, lg: 4 }); // responsive value
+
+
+  const sliderSettings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: slidesToShow || 1,
+    slidesToScroll: 1,
+    rtl: false,
+  };
+
+
   return (
-    <VStack w={'100%'} p={'40px'} alignItems={'start'} height={height} my={'20px'}>
+    <VStack w={'100%'} p={{ base: '0px', md: '40px' }} justifyContent={{ base: 'center' }} alignItems={'start'} height={height} my={'20px'}>
       <HStack w={'100%'} justifyContent={'space-between'}>
         <Text fontWeight={'bold'} color={'white'}>{title}</Text>
         <HStack>

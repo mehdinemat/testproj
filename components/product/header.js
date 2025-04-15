@@ -57,12 +57,12 @@ const Header = ({ children }) => {
 
   return (
     <Box
-      marginTop={"100px"}
+      marginTop={{ base: '60px', md: "100px" }}
       as={Stack}
       justifyContent={"center"}
       alignItems={"center"}
       width="100%"
-      height={"500px"}
+      height={{ base: '297px', md: "500px" }}
       bg={"#3646B3"}
       p={2}
       px={4}
@@ -72,7 +72,7 @@ const Header = ({ children }) => {
       bgPosition="center"
     >
       <HStack
-        height={"500px"}
+        height={{ base: '297px', md: "500px" }}
         w={"100%"}
         alignItems={"center"}
         justifyContent={"space-between"}

@@ -8,6 +8,7 @@ import {
   Image,
   Stack,
   Text,
+  useBreakpointValue,
   VStack
 } from "@chakra-ui/react";
 
@@ -30,6 +31,10 @@ const items = [
 ];
 
 const Index = () => {
+
+
+  const slidesToShow = useBreakpointValue({ base: 1, md: 2, lg: 4 }); // responsive value
+
   return (
     <MainLayout>
       <Header />
@@ -39,22 +44,23 @@ const Index = () => {
         justifyContent={"center"}
         maxW="container.xl"
         mx="auto"
-        p={"60px"}
+        p={{ base: '20px', md: "60px" }}
         height={"100%"}
         my={"20px"}
       >
-        <HStack dir="rtl" w={"100%"} justifyContent={"space-between"}>
-          <VStack w={"100%"} alignItems={"start"}>
+        <Stack dir="rtl" justifyContent={"space-between"} direction={{ base: 'column', md: 'row' }} w={{ base: 'calc( 100% - 10px )', md: "100%" }}>
+          <VStack w={"100%"} order={{ base: 2, md: 1 }} alignItems={{ base: 'center', md: "start" }}>
             <Text
+
               fontSize={"24px"}
               fontWeight={"bold"}
-              w={"380px"}
+              w={"auto"}
               textAlign={"start"}
               mb={"10px"}
             >
               موتور جستجو هوشمند سؤالات
             </Text>
-            <Text w={"400px"} fontSize={"16px"} textAlign={"start"}>
+            <Text w={"auto"} fontSize={"16px"} textAlign={"start"} whiteSpace="normal">
               لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با
               استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله
               در ستون و سطرآنچنان که لازم است
@@ -63,10 +69,10 @@ const Index = () => {
               اطلاعات بیشتر
             </Button>
           </VStack>
-          <Stack w={"100%"}>
-            <Image src="../../questionlogo.png" w={"509px"} h={"500px"} />
+          <Stack w={"100%"} order={{ base: 1, md: 2 }} alignItems={{ base: 'center' }}>
+            <Image src="../../questionlogo.png" w={{ base: '357px', md: "509px" }} h={{ base: '350px', md: "500px" }} />
           </Stack>
-        </HStack>
+        </Stack>
       </Box>
       <Box
         w="100%"
@@ -74,26 +80,26 @@ const Index = () => {
         justifyContent={"center"}
         maxW="container.xl"
         mx="auto"
-        p={"60px"}
+        p={{ base: '20px', md: "60px" }}
         height={"100%"}
         my={"20px"}
       >
-        <HStack dir="rtl" w={"100%"} justifyContent={"space-between"}>
-          <Stack w={"100%"}>
-            <Image src="../../questionlogo.png" w={"509px"} h={"500px"} />
+        <Stack dir="rtl" justifyContent={"space-between"} direction={{ base: 'column', md: 'row' }} w={{ base: 'calc( 100% - 10px )', md: "100%" }}>
+          <Stack w={"100%"} alignItems={{ base: 'center' }}>
+            <Image src="../../questionlogo.png" w={{ base: '357px', md: "509px" }} h={{ base: '350px', md: "500px" }} />
           </Stack>
 
-          <VStack w={"100%"} alignItems={"start"}>
+          <VStack w={"100%"} alignItems={{ base: 'center', md: "start" }}>
             <Text
               fontSize={"24px"}
               fontWeight={"bold"}
-              w={"380px"}
+              w={"auto"}
               textAlign={"start"}
               mb={"10px"}
             >
               موتور جستجو هوشمند سؤالات
             </Text>
-            <Text w={"400px"} fontSize={"16px"} textAlign={"start"}>
+            <Text w={"auto"} fontSize={"16px"} textAlign={"start"} whiteSpace="normal">
               لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با
               استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله
               در ستون و سطرآنچنان که لازم است
@@ -102,15 +108,15 @@ const Index = () => {
               اطلاعات بیشتر
             </Button>
           </VStack>
-        </HStack>
+        </Stack>
       </Box>
       <Box
-        marginTop={"100px"}
+        marginTop={{ base: '0px', md: "100px" }}
         as={Stack}
         justifyContent={"center"}
         alignItems={"center"}
         width="100%"
-        height={"564px"}
+        height={{ base: '386px', md: "564px" }}
         bg={"#3646B3"}
         p={2}
         px={4}
@@ -120,7 +126,7 @@ const Index = () => {
         bgPosition="center"
       >
         <HStack
-          height={"500px"}
+          height={{ base: '380px', md: "500px" }}
           w={"100%"}
           alignItems={"center"}
           justifyContent={"space-between"}
@@ -132,14 +138,15 @@ const Index = () => {
             height={"100%"}
           >
             <Stack
-              maxW="80%"
+              maxW={{ base: '100%', md: "80%" }}
               mx="auto"
               py={4}
+              px={{ base: 8 }}
               top={'0px'}
               textAlign={'center'}
             // position={"absolute"}
             >
-              <SliderProduct items={items} title={'سایر محصولات'} />
+              <SliderProduct items={items} title={'سایر محصولات'} height={slidesToShow == 1 ? '386px' : null} />
             </Stack>
           </VStack>
         </HStack>
