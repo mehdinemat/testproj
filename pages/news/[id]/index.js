@@ -1,5 +1,5 @@
 import MainLayout from "@/components/mainLayout";
-import HeaderId from "@/components/news/headerid";
+import HeaderId from "@/components/news/headerId";
 import Reply from "@/components/news/reply";
 import SuggestCard from "@/components/news/suggestCard";
 import { Box, Button, Grid, GridItem, HStack, Image, Text, Textarea, VStack } from "@chakra-ui/react";
