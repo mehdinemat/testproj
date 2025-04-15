@@ -1,18 +1,15 @@
 import MainLayout from "@/components/mainLayout";
 import Header from "@/components/products/header";
-import HeaderSlider from "@/components/products/headerslider";
 import ProductCard from "@/components/products/productcard";
 import {
   Box,
   Button,
-  Container,
-  Flex,
   Grid,
   HStack,
   Image,
   Stack,
   Text,
-  VStack,
+  VStack
 } from "@chakra-ui/react";
 
 const Index = () => {
@@ -25,26 +22,26 @@ const Index = () => {
         justifyContent={"center"}
         maxW="container.xl"
         mx="auto"
-        p={"60px"}
+        p={{ base: '20px', md: "60px" }}
         height={"100%"}
         my={"20px"}
       >
-        <HStack dir="rtl" w={"100%"} justifyContent={"space-between"}>
-          <Stack w={"100%"}>
-            <Image src="./questionlogo.png" w={"509px"} h={"500px"} />
+        <Stack direction={{ base: 'column', md: 'row' }} dir="rtl" w={{ base: 'calc( 100% - 10px )', md: "100%" }} justifyContent={"space-between"}>
+          <Stack w={"100%"} alignItems={{ base: 'center' }}>
+            <Image src="./questionlogo.png" w={{ base: '225px', md: "509px" }} h={{ base: '222px', md: "500px" }} />
           </Stack>
 
-          <VStack w={"100%"} alignItems={"start"}>
+          <VStack w={'100%'} alignItems={{ base: 'center', md: "start" }}>
             <Text
-              fontSize={"24px"}
+              fontSize={"20px"}
               fontWeight={"bold"}
-              w={"380px"}
+              w={"auto"}
               textAlign={"start"}
               mb={"10px"}
             >
               موتور جستجو هوشمند سؤالات
             </Text>
-            <Text w={"400px"} fontSize={"16px"} textAlign={"start"}>
+            <Text w={"auto"} fontSize={"14px"} textAlign={"start"} whiteSpace="normal">
               لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با
               استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله
               در ستون و سطرآنچنان که لازم است
@@ -53,7 +50,7 @@ const Index = () => {
               اطلاعات بیشتر
             </Button>
           </VStack>
-        </HStack>
+        </Stack>
       </Box>
       <Box
         w="100%"
@@ -61,22 +58,26 @@ const Index = () => {
         justifyContent={"center"}
         maxW="container.xl"
         mx="auto"
-        p={"60px"}
+        p={{ base: '20px', md: "60px" }}
         height={"100%"}
         my={"20px"}
       >
-        <HStack dir="rtl" w={"100%"} justifyContent={"space-between"}>
-          <VStack w={"100%"} alignItems={"start"}>
+        <Stack direction={{ base: 'column', md: 'row' }} dir="rtl" w={{ base: 'calc( 100% - 10px )', md: "100%" }} justifyContent={"space-between"}>
+          <Stack w={"100%"} alignItems={{ base: 'center' }} order={{ base: 1, md: 2 }} >
+            <Image src="./questionlogo.png" w={{ base: '225px', md: "509px" }} h={{ base: '222px', md: "500px" }} />
+          </Stack>
+
+          <VStack w={'100%'} alignItems={{ base: 'center', md: "start" }} order={{ base: 2, md: 1 }}>
             <Text
-              fontSize={"24px"}
+              fontSize={"20px"}
               fontWeight={"bold"}
-              w={"380px"}
+              w={"auto"}
               textAlign={"start"}
               mb={"10px"}
             >
               موتور جستجو هوشمند سؤالات
             </Text>
-            <Text w={"400px"} fontSize={"16px"} textAlign={"start"}>
+            <Text w={"auto"} fontSize={"14px"} textAlign={"start"} whiteSpace="normal">
               لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با
               استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله
               در ستون و سطرآنچنان که لازم است
@@ -85,10 +86,7 @@ const Index = () => {
               اطلاعات بیشتر
             </Button>
           </VStack>
-          <Stack w={"100%"}>
-            <Image src="./questionlogo.png" w={"509px"} h={"500px"} />
-          </Stack>
-        </HStack>
+        </Stack>
       </Box>
       <Box
         w="100%"
@@ -96,7 +94,7 @@ const Index = () => {
         justifyContent={"center"}
         maxW="container.xl"
         mx="auto"
-        p={"60px"}
+        p={{ base: '20px', md: "60px" }}
         my={"20px"}
       >
         <HStack mb={'20px'}>
@@ -104,7 +102,7 @@ const Index = () => {
           <Text></Text>
         </HStack>
         {
-          <Grid templateColumns="repeat(3, 1fr)" gap={"2px"} w={"100%"}>
+          <Grid templateColumns={{ base: "repeat(1, 1fr)", md: "repeat(3, 1fr)" }} gap={"2px"} w={"100%"}>
             <ProductCard />
             <ProductCard />
             <ProductCard />

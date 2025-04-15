@@ -1,17 +1,15 @@
 import {
-  Avatar,
   Box,
   Button,
   Flex,
-  HStack,
   Image,
+  Stack,
   Text,
-  VStack,
+  VStack
 } from "@chakra-ui/react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
-import { Global } from "@emotion/react";
 
 const sliderSettings = {
   dots: true,
@@ -50,7 +48,7 @@ const HeaderSlider = () => {
       justifyContent={"center"}
       maxW="container.xl"
       mx="auto"
-      p={"60px"}
+      p={{ base: "20px", md: '60px' }}
       height={"100%"}
       my={"20px"}
     >
@@ -66,18 +64,18 @@ const HeaderSlider = () => {
             justifyContent="space-between"
             alignItems="center"
           >
-            <HStack dir="rtl">
-              <VStack w={'100%'} alignItems={'start'}>
-                <Text fontSize={'24px'} fontWeight={'bold'} color={'white'} w={'180px'} textAlign={'start'}>موتور جستجو هوشمند سؤالات</Text>
-                <Text w={'500px'} fontSize={'16px'}textAlign={'start'}color={'white'}>
+            <Stack direction={{ base: 'column', md: 'row' }} dir="rtl">
+              <VStack w={'100%'} alignItems={{ base: 'center', md: 'start' }} order={{ base: 2, md: 1 }}>
+                <Text fontSize={{ base: '20px', md: '24px' }} fontWeight={'bold'} color={'white'} w={{ base: 'auto', md: '180px' }} textAlign={'start'}>موتور جستجو هوشمند سؤالات</Text>
+                <Text w={{ base: 'auto', md: '500px' }} fontSize={{ base: '14px', md: '16px' }} textAlign={{ base: 'center', md: 'start' }} color={'white'}>
                   لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و
                   با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و
                   مجله در ستون و سطرآنچنان که لازم است
                 </Text>
                 <Button bgColor={'#29CCCC'} fontWeight={'normal'} mt={'20px'}>اطلاعات بیشتر</Button>
               </VStack>
-              <Image src="./headerslider.png" w={'509px'} h={'500px'}/>
-            </HStack>
+              <Image src="./headerslider.png" w={{ base: '357px', md: '509px' }} h={{ base: '350px', md: '500px' }} order={{ base: 1, md: 2 }} />
+            </Stack >
           </Flex>
         ))}
       </Slider>

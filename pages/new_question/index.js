@@ -43,14 +43,17 @@ const data = [
   },
 ];
 
-const breakpointColumnsObj = {
-  default: 2,
-  1100: 2,
-  700: 2,
-};
+
 
 const Index = () => {
   const cardBg = useColorModeValue("white", "gray.800");
+
+  const breakpointColumnsObj = {
+    default: 2,
+    1100: 2,
+    700: 1,
+  };
+
 
   return (
     <MainLayout>

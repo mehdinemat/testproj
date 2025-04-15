@@ -1,4 +1,4 @@
-import { Box, Container, HStack, Stack, Text, VStack } from "@chakra-ui/react";
+import { Box, HStack, Stack, VStack } from "@chakra-ui/react";
 import { Geist, Geist_Mono } from "next/font/google";
 import { useRouter } from "next/router";
 import { FaHeadphonesAlt } from "react-icons/fa";
@@ -58,7 +58,7 @@ const Header = ({ children }) => {
 
   return (
     <Box
-      marginTop={"100px"}
+      marginTop={{ base: '60px', md: "100px" }}
       as={Stack}
       justifyContent={"center"}
       alignItems={"center"}
@@ -85,11 +85,11 @@ const Header = ({ children }) => {
           height={"100%"}
         >
           <Stack
-            maxW="80%"
+            maxW={{ base: '100%', md: "80%" }}
             mx="auto"
             py={4}
             top={'0px'}
-            // position={"absolute"}
+          // position={"absolute"}
           >
             <HeaderSlider />
           </Stack>
