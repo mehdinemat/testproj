@@ -70,7 +70,6 @@ const MainLayout = ({ children }) => {
   const { data: dataHistoric, isLoading: isLoadingHistoric } =
     useSWR("to_text/histories");
 
-
   const handleButtonClick = (link) => {
     router.replace(link);
   };
