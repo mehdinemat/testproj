@@ -43,21 +43,20 @@ import {
   IoLogoYoutube
 } from "react-icons/io";
 import { IoCall, IoExitOutline, IoLocation, IoSearch } from "react-icons/io5";
-import useSWR from "swr";
 import MenuBar from "./mobile/menuBar";
 
 const menuList = [
   {
-    title: "سوال ها",
+    title: "سوال ها", link: 'questions'
   },
   {
     title: "برچسب ها",
   },
   {
-    title: "کاربران",
+    title: "کاربران", link: 'users'
   },
   {
-    title: "محصولات",
+    title: "محصولات", link: 'products'
   },
 ];
 
@@ -67,12 +66,6 @@ const MainLayout = ({ children }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [showInput, setShowInput] = useState(false);
   const inputRef = useRef(null);
-  const { data: dataHistoric, isLoading: isLoadingHistoric } =
-    useSWR("to_text/histories");
-
-  const handleButtonClick = (link) => {
-    router.replace(link);
-  };
 
   useEffect(() => {
     console.log("Adding scroll event listener");
@@ -112,6 +105,13 @@ const MainLayout = ({ children }) => {
     }, 300); // Give time for animation
   };
 
+  const handleClickMenuLink = (link) => {
+    router.replace(link)
+  }
+
+  const handleClickHome = () => {
+    router.replace('/')
+  }
 
   return (
     <VStack minHeight="100vh" w={"100%"} alignItems={"start"} gap={0}>
@@ -143,8 +143,8 @@ const MainLayout = ({ children }) => {
           <HStack w={"100%"} alignItems={"center"} height={"100%"} justifyContent={'space-between'}>
             <HStack ml={"20px"} w={'100%'}>
               <MenuBar />
-              <Image src="../../question.png" width={{ base: '25px', md: "40px" }} height={{ base: '35px', md: "56px" }} />
-              <Image src="../../parsaheader.png" width={{ base: '57px', md: "91px" }} height={{ base: '23px', md: "37px" }} />
+              <Image src="../../question.png" width={{ base: '25px', md: "40px" }} height={{ base: '35px', md: "56px" }} onClick={handleClickHome} cursor={'pointer'} />
+              <Image src="../../parsaheader.png" width={{ base: '57px', md: "91px" }} height={{ base: '23px', md: "37px" }} onClick={handleClickHome} cursor={'pointer'} />
               <InputGroup width={"327px"} display={{ base: "none", md: "block" }}
               >
                 <Input height={"46px"} placeholder="جستجو" onClick={handleClickSearch} />
@@ -195,14 +195,14 @@ const MainLayout = ({ children }) => {
           </HStack>
           <HStack spacing={4} display={{ base: 'none', md: 'flex' }}>
             {menuList?.map((item) => (
-              <Text textAlign={"center"} w={"80px"}>
+              <Text textAlign={"center"} fontSize={'sm'} w={"70px"} onClick={e => handleClickMenuLink(item?.link)} cursor={'pointer'}>
                 {item?.title}
               </Text>
             ))}
             <Menu >
               <MenuButton px={4} py={2} transition="all 0.2s">
                 <HStack>
-                  <Text>فارسی</Text>
+                  <Text fontSize={'sm'}>فارسی</Text>
                   <IoIosArrowDown />
                 </HStack>
               </MenuButton>
