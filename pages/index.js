@@ -83,7 +83,7 @@ export default function Home({ children }) {
           }} gap={"20px"} w={"100%"} >
 
           {/* Right Sidebar */}
-          <Box area="right" w="100%"
+          <Box w="100%"
             maxW={{ base: "calc( 100vw - 50px )", md: '100vw' }}
             overflow="hidden"
             wordBreak="break-word"
@@ -170,7 +170,7 @@ export default function Home({ children }) {
 
           {/* Main Content */}
           <Box p="6" order={{ base: 1, md: 2 }} as={GridItem}
-            area="main" colSpan={{ md: 2 }} w="100%" overflowWrap="break-word"
+            colSpan={{ md: 2 }} w="100%" overflowWrap="break-word"
             wordBreak="break-word"
             maxW="100vw"
             whiteSpace="normal"
@@ -215,7 +215,7 @@ export default function Home({ children }) {
 
           {/* Left Sidebar */}
           <Box order={3} as={GridItem}
-            colSpan={'1'} w="100%" area="left"
+            colSpan={'1'} w="100%"
             maxW={{ base: "calc( 100vw - 50px )", md: '100vw' }}
 
             whiteSpace="normal"
@@ -265,7 +265,8 @@ export default function Home({ children }) {
               </Text>
             </Box>
           </Box>
-          <GridItem order={4} area="slider" colSpan={{ md: 3 }} w={'100%'}
+
+          <GridItem order={4} colSpan={{ md: 3 }} w={'100%'}
             maxW={{ base: "calc( 100vw - 50px )", md: '100vw' }}
             whiteSpace="normal"
             overflowWrap="break-word">
