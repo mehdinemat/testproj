@@ -44,8 +44,11 @@ jobs:
       
       - name: Docker stop/remove old and run
         run: |
-          ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "PROJECT_NAME=${GITHUB_REPOSITORY##*/} && cd '${{ secrets.APP_PATH }}' && \
-            sudo docker stop \$PROJECT_NAME || true && \
-            sudo docker rm \$PROJECT_NAME || true && \
-            sudo docker run -d --name \$PROJECT_NAME --env-file .env --restart unless-stopped -p 3000:3000 \$PROJECT_NAME:v1
-            sudo docker image prune -f"
+          ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
+            PROJECT_NAME=${GITHUB_REPOSITORY##*/}
+            cd '${{ secrets.APP_PATH }}'
+            sudo docker stop $PROJECT_NAME || true
+            sudo docker rm $PROJECT_NAME || true
+            sudo docker run -d --name $PROJECT_NAME --env-file .env --restart unless-stopped -p 3000:3000 $PROJECT_NAME:v1
+            sudo docker image prune -f
+          EOF
